@@ -11,19 +11,8 @@ import {
 
 export const HomeTable = () => {
   return (
-    <div className="grid gap-x-2 gap-y-2 items-center justify-start ml-5 mt-5">
-      <Card>
-        <CardHeader>
-          <CardTitle>Card Title</CardTitle>
-          <CardDescription>Card Description</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <p>Card Content</p>
-        </CardContent>
-        <CardFooter>
-          <p>Card Footer</p>
-        </CardFooter>
-      </Card>
+    <div className="grid gap-x-2 gap-y-2 items-center justify-center ml-5 mt-5">
+      <Card className="w-[90vw] h-[350px]"></Card>
     </div>
   );
 };

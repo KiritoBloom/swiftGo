@@ -7,7 +7,10 @@ const Navbar = () => {
   return (
     <div className="bg-gray-200 w-full h-[50px] flex items-center border-b">
       <ShoppingCart className="ml-5 mr-2 w-5 h-5" />
-      <h1 className="font-bold">SwiftGo</h1>
+      <h1 className="font-bold">
+        Swift<span className="text-red-700">G</span>
+        <span className="text-cyan-700">O</span>
+      </h1>
       <div className="flex-grow">
         <SearchInput />
       </div>

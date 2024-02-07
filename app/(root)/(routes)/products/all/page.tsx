@@ -1,17 +1,11 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { Card, CardDescription, CardTitle } from "@/components/ui/card";
+import { Separator } from "@/components/ui/separator";
 import axios from "axios";
-import {
-  Card,
-  CardTitle,
-  CardDescription,
-  CardContent,
-} from "@/components/ui/card";
-import { Separator } from "./ui/separator";
 import Image from "next/image";
+import { useEffect, useState } from "react";
 
-// Define the product interface
 interface Product {
   id: number;
   title: string;
@@ -25,9 +19,7 @@ interface Product {
   images: string[];
 }
 
-// ... (previous imports)
-
-export const HomeTable = () => {
+export default function Page() {
   const [products, setProducts] = useState<Product[]>([]);
 
   useEffect(() => {
@@ -53,27 +45,17 @@ export const HomeTable = () => {
   };
 
   return (
-    <>
-      <div className="items-center justify-center flex mt-5">
-        <Card className="w-[90vw] h-[350px] bg-cyan-500">
-          <CardTitle className="flex justify-center mt-10 text-[70px] text-white">
-            Your go-to to the best products
-          </CardTitle>
-          <CardContent className="flex justify-center mt-10 text-[50px] font-bold">
-            Check out our new hit Products!
-          </CardContent>
-        </Card>
-      </div>
-      <div className="flex justify-center mt-5">
-        <h1 className="font-bold underline text-[30px]">Hit Products!</h1>
-      </div>
+    <div>
+      <h1 className="text-[50px] font-bold mt-5 flex justify-center">
+        Products
+      </h1>
       <div className="flex justify-center flex-wrap mt-5 gap-x-[20px]">
-        {products.slice(1, 6).map((product) => (
+        {products.slice(1, 51).map((product) => (
           <Card
             key={product.id}
             className="w-[20vw] h-[53vh] mt-5 hover:scale-105 transition-all duration-400"
           >
-            <CardTitle className="mt-5 flex justify-center text-lg">
+            <CardTitle className="mt-5 flex justify-center text-md">
               {product.title}
             </CardTitle>
             <Separator className="mt-2" />
@@ -89,13 +71,13 @@ export const HomeTable = () => {
             <CardDescription className="ml-2 mt-2 font-bold text-[10px]">
               {truncateDescription(product.description, 250)}
             </CardDescription>
-            <Separator className="mt-10" />
+            <Separator className="mt-5" />
             <CardDescription className="text-md ml-5 mt-2">
-              {product.price}
+              Price: ${product.price}
             </CardDescription>
           </Card>
         ))}
       </div>
-    </>
+    </div>
   );
-};
+}

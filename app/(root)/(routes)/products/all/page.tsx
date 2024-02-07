@@ -4,6 +4,7 @@ import { Card, CardDescription, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import axios from "axios";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 interface Product {
@@ -21,6 +22,7 @@ interface Product {
 
 export default function Page() {
   const [products, setProducts] = useState<Product[]>([]);
+  const router = useRouter();
 
   useEffect(() => {
     // Fetch data from the API
@@ -38,6 +40,10 @@ export default function Page() {
     fetchData();
   }, []);
 
+  const handleOnClick = (productId: number) => {
+    router.push(`/products/${productId}/`);
+  };
+
   const truncateDescription = (description: string, limit: number) => {
     return description.length > limit
       ? `${description.slice(0, limit)}...`
@@ -54,6 +60,7 @@ export default function Page() {
           <Card
             key={product.id}
             className="w-[20vw] h-[53vh] mt-5 hover:scale-105 transition-all duration-400"
+            onClick={() => handleOnClick(product.id)}
           >
             <CardTitle className="mt-5 flex justify-center text-md">
               {product.title}

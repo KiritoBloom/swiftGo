@@ -10,6 +10,7 @@ import {
 } from "@/components/ui/card";
 import { Separator } from "./ui/separator";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 // Define the product interface
 interface Product {
@@ -25,10 +26,12 @@ interface Product {
   images: string[];
 }
 
-// ... (previous imports)
-
 export const HomeTable = () => {
   const [products, setProducts] = useState<Product[]>([]);
+  const router = useRouter();
+  const handleOnClick = (productId: number) => {
+    router.push(`/products/${productId}/`);
+  };
 
   useEffect(() => {
     // Fetch data from the API
@@ -70,6 +73,7 @@ export const HomeTable = () => {
       <div className="flex justify-center flex-wrap mt-5 gap-x-[20px]">
         {products.slice(1, 6).map((product) => (
           <Card
+            onClick={() => handleOnClick(product.id)}
             key={product.id}
             className="w-[20vw] h-[53vh] mt-5 hover:scale-105 transition-all duration-400"
           >
@@ -91,7 +95,7 @@ export const HomeTable = () => {
             </CardDescription>
             <Separator className="mt-10" />
             <CardDescription className="text-md ml-5 mt-2">
-              {product.price}
+              Price: ${product.price}
             </CardDescription>
           </Card>
         ))}

@@ -16,7 +16,6 @@ interface Product {
     image: string;
   };
   images: string[];
-  // Add other properties as needed
 }
 
 const ProductId = () => {
@@ -54,28 +53,28 @@ const ProductId = () => {
     <div>
       {product ? (
         <>
-          <div className="flex justify-center mt-5">
+          <div className="flex justify-start mt-5 ml-5">
             <h2 className="text-[40px] font-bold">{product.title}</h2>
           </div>
           {product.images.slice(0, 1).map((image, index) => (
-            <Image
-              key={index}
-              src={image}
-              width={200}
-              height={200}
-              alt={`Product Image ${index + 1} for ${product.title}`}
-              className="w-[30vw] aspect-auto m-2 ring-2 ring-offset-2 rounded-md ml-5"
-            />
-          ))}
-
-          <div className="flex-col justify-center mt-5 ml-5">
-            <div className="bg-gray-200 w-full border-4 rounded-sm">
-              <p className="text-md">{product.description}</p>
+            <div className="flex ml-5 mt-5" key={index}>
+              <div className="mr-5">
+                <Image
+                  src={image}
+                  width={500} // Set the width to 500 pixels
+                  height={500} // Set the height to 500 pixels
+                  alt={`Product Image ${index + 1} for ${product.title}`}
+                  className="ring-2 ring-offset-2 rounded-md"
+                />
+              </div>
+              <div className="flex flex-col justify-center">
+                <div className="bg-gray-200 border-4 rounded-sm mb-3 p-3">
+                  <p className="text-md">{product.description}</p>
+                </div>
+                <p className="text-[35px] font-bold">Price: ${product.price}</p>
+              </div>
             </div>
-            <p className="text-[35px] mt-10 font-bold">
-              Price: ${product.price}
-            </p>
-          </div>
+          ))}
         </>
       ) : (
         <p>Loading...</p>

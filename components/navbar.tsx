@@ -3,11 +3,10 @@
 import { UserButton } from "@clerk/nextjs";
 import SearchInput from "./search-input";
 import { ModeToggle } from "./mode-toggle";
-import { ShoppingCart } from "lucide-react";
-import axios from "axios";
+import { LucideShoppingBag, ShoppingCart } from "lucide-react";
 import { useRouter } from "next/navigation";
 
-const Navbar = async () => {
+const Navbar = () => {
   const router = useRouter();
   const handleOnClick = () => {
     router.push("/cart");
@@ -26,9 +25,12 @@ const Navbar = async () => {
       <div className="mr-3">
         <ModeToggle />
       </div>
-      <div className="flex items-center mr-2 cursor-pointer">
-        <div className="mr-5" onClick={() => handleOnClick()}>
-          <ShoppingCart />
+      <div className="flex items-center mr-2">
+        <div
+          className="mr-5 cursor-pointer hover:bg-primary/10 p-2 rounded-md transition-all"
+          onClick={() => handleOnClick()}
+        >
+          <LucideShoppingBag size={20} />
         </div>
         <UserButton afterSignOutUrl="/" />
       </div>

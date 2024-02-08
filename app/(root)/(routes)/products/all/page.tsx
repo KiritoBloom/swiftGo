@@ -51,15 +51,13 @@ export default function Page() {
   };
 
   return (
-    <div>
-      <h1 className="text-[50px] font-bold mt-5 flex justify-center">
-        Products
-      </h1>
+    <div className="flex flex-col items-center">
+      <h1 className="text-[50px] font-bold mt-5">Products</h1>
       <div className="flex justify-center flex-wrap mt-5 gap-x-[20px]">
         {products.slice(1, 51).map((product) => (
           <Card
             key={product.id}
-            className="w-[20vw] h-[53vh] mt-5 hover:scale-105 transition-all duration-400 cursor-pointer"
+            className="w-[20vw] mt-5 hover:scale-105 transition-all duration-400 cursor-pointer"
             onClick={() => handleOnClick(product.id)}
           >
             <CardTitle className="mt-5 flex justify-center text-md">

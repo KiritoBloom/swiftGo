@@ -55,7 +55,7 @@ const ProductId = () => {
       {product ? (
         <>
           <div className="flex justify-center mt-5">
-            <h2 className="text-2xl font-bold">{product.title}</h2>
+            <h2 className="text-[40px] font-bold">{product.title}</h2>
           </div>
           {product.images.slice(0, 1).map((image, index) => (
             <Image
@@ -64,13 +64,17 @@ const ProductId = () => {
               width={200}
               height={200}
               alt={`Product Image ${index + 1} for ${product.title}`}
-              className="w-[20vw] aspect-auto m-2 ring-2 ring-offset-2 rounded-md ml-5"
+              className="w-[30vw] aspect-auto m-2 ring-2 ring-offset-2 rounded-md ml-5"
             />
           ))}
 
           <div className="flex-col justify-center mt-5 ml-5">
-            <p className="text-md">{product.description}</p>
-            <p className="text-md ">Price: ${product.price}</p>
+            <div className="bg-gray-200 w-full border-4 rounded-sm">
+              <p className="text-md">{product.description}</p>
+            </div>
+            <p className="text-[35px] mt-10 font-bold">
+              Price: ${product.price}
+            </p>
           </div>
         </>
       ) : (

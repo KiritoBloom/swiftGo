@@ -75,7 +75,7 @@ export const HomeTable = () => {
           <Card
             onClick={() => handleOnClick(product.id)}
             key={product.id}
-            className="w-[20vw] h-[53vh] mt-5 hover:scale-105 transition-all duration-400"
+            className="w-[20vw] h-[53vh] mt-5 hover:scale-105 transition-all duration-400 cursor-pointer"
           >
             <CardTitle className="mt-5 flex justify-center text-lg">
               {product.title}

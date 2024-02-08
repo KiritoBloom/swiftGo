@@ -1,9 +1,18 @@
+"use client";
+
 import { UserButton } from "@clerk/nextjs";
 import SearchInput from "./search-input";
 import { ModeToggle } from "./mode-toggle";
 import { ShoppingCart } from "lucide-react";
+import axios from "axios";
+import { useRouter } from "next/navigation";
 
-const Navbar = () => {
+const Navbar = async () => {
+  const router = useRouter();
+  const handleOnClick = () => {
+    router.push("/cart");
+  };
+
   return (
     <div className="bg-gray-200 w-full h-[50px] flex items-center border-b">
       <ShoppingCart className="ml-5 mr-2 w-5 h-5" />
@@ -17,7 +26,10 @@ const Navbar = () => {
       <div className="mr-3">
         <ModeToggle />
       </div>
-      <div className="flex items-center mr-2">
+      <div className="flex items-center mr-2 cursor-pointer">
+        <div className="mr-5" onClick={() => handleOnClick()}>
+          <ShoppingCart />
+        </div>
         <UserButton afterSignOutUrl="/" />
       </div>
     </div>

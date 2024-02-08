@@ -59,7 +59,7 @@ export default function Page() {
         {products.slice(1, 51).map((product) => (
           <Card
             key={product.id}
-            className="w-[20vw] h-[53vh] mt-5 hover:scale-105 transition-all duration-400"
+            className="w-[20vw] h-[53vh] mt-5 hover:scale-105 transition-all duration-400 cursor-pointer"
             onClick={() => handleOnClick(product.id)}
           >
             <CardTitle className="mt-5 flex justify-center text-md">
@@ -68,7 +68,7 @@ export default function Page() {
             <Separator className="mt-2" />
             <div className="flex flex-wrap justify-center">
               <Image
-                src={product.images[0]} // Use the first image from the images array
+                src={product.images[1]} // Use the first image from the images array
                 width={200}
                 height={200}
                 alt={`Product Image for ${product.title}`}

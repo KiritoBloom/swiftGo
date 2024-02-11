@@ -51,7 +51,7 @@ export default function Page() {
   };
 
   return (
-    <div className="flex flex-col items-center">
+    <div className="flex flex-col items-center overflow-y-auto">
       <h1 className="text-[50px] font-bold mt-5">Products</h1>
       <div className="flex justify-center flex-wrap mt-5 gap-x-[20px]">
         {products.slice(1, 51).map((product) => (

@@ -70,7 +70,7 @@ export const HomeTable = () => {
       <div className="flex justify-center mt-5">
         <h1 className="font-bold underline text-[30px]">Hit Products!</h1>
       </div>
-      <div className="flex justify-center flex-wrap mt-5 gap-x-[20px]">
+      <div className="flex justify-center flex-wrap mt-5 gap-x-[20px] ">
         {products.slice(1, 6).map((product) => (
           <Card
             onClick={() => handleOnClick(product.id)}

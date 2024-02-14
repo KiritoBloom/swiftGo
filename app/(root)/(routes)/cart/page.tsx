@@ -31,11 +31,17 @@ export default function Page() {
     fetchCartItems();
   }, []); // Empty dependency array to run the effect only once when the component mounts
 
+  const truncateDescription = (description: string, limit: number) => {
+    return description.length > limit
+      ? `${description.slice(0, limit)}...`
+      : description;
+  };
+
   return (
-    <div className="mr-10 mt-10 flex justify-center">
-      <div className="bg-primary/5 w-[500px] h-[500px] rounded-md">
+    <div className="mr-10 mt-10 flex justify-center overflow-y-auto">
+      <div className="bg-primary/5 w-[500px] h-full rounded-md">
         <h1 className="text-xl ml-5 mt-10">Cart Summary</h1>
-        <div className="flex justify-center items-center mt-10">
+        <div className="flex justify-center items-center mt-10 ">
           <Separator className=" w-[90%] bg-black" />
         </div>
         <div className="ml-5 mt-10">
@@ -43,11 +49,12 @@ export default function Page() {
           <div className="mt-5">
             {/* Map through cartItems and display each product */}
             {cartItems.map((item) => (
-              <div key={item.id}>
-                <p>{item.id}</p>
+              <div key={item.id} className="mb-8">
+                <p>Product Id: {item.id}</p>
                 <p>Product Name: {item.title}</p>
                 <p>Product Price: ${item.Price}</p>
-                <p>Product Description: {item.description}</p>
+                <p>{truncateDescription(item.description, 100)}</p>
+                <Separator />
               </div>
             ))}
             <h2 className="mt-10 text-xl font-bold flex justify-end">
@@ -56,7 +63,7 @@ export default function Page() {
           </div>
         </div>
         <div className="flex justify-center">
-          <Button className="mt-10 w-[90%]">CheckOut</Button>
+          <Button className="mb-10 mt-5 w-[90%]">CheckOut</Button>
         </div>
       </div>
     </div>

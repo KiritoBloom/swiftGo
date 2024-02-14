@@ -65,14 +65,18 @@ export default function Page() {
             </CardTitle>
             <Separator className="mt-2" />
             <div className="flex flex-wrap justify-center">
-              <Image
-                src={product.images[0]} // Use the first image from the images array
-                width={200}
-                height={200}
-                alt={`Product Image for ${product.title}`}
-                className="w-[10vw] aspect-auto m-2 ring-2 ring-offset-2 rounded-md"
-              />
+              {product.images.slice(2).map((imageUrl, index) => (
+                <Image
+                  key={index}
+                  src={imageUrl.replace(/[\[\]"]+/g, "")} // Remove square brackets and quotes from the URL
+                  width={200}
+                  height={200}
+                  alt={`Product Image for ${product.title}`}
+                  className="w-[10vw] aspect-auto m-2 ring-2 ring-offset-2 rounded-md"
+                />
+              ))}
             </div>
+
             <CardDescription className="ml-2 mt-2 font-bold text-[10px]">
               {truncateDescription(product.description, 250)}
             </CardDescription>

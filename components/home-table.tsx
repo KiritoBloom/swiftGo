@@ -75,20 +75,23 @@ export const HomeTable = () => {
           <Card
             onClick={() => handleOnClick(product.id)}
             key={product.id}
-            className="w-[20vw] h-[53vh] mt-5 hover:scale-105 transition-all duration-400 cursor-pointer"
+            className="w-[20vw] h-[60vh] mt-5 hover:scale-105 transition-all duration-400 cursor-pointer"
           >
             <CardTitle className="mt-5 flex justify-center text-lg">
               {product.title}
             </CardTitle>
             <Separator className="mt-2" />
             <div className="flex flex-wrap justify-center">
-              <Image
-                src={product.images[0]} // Use the first image from the images array
-                width={200}
-                height={200}
-                alt={`Product Image for ${product.title}`}
-                className="w-[10vw] aspect-auto m-2 ring-2 ring-offset-2 rounded-md"
-              />
+              {product.images.slice(2).map((imageUrl, index) => (
+                <Image
+                  key={index}
+                  src={imageUrl.replace(/[\[\]"]+/g, "")} // Remove square brackets and quotes from the URL
+                  width={200}
+                  height={200}
+                  alt={`Product Image for ${product.title}`}
+                  className="w-[10vw] aspect-auto m-2 ring-2 ring-offset-2 rounded-md"
+                />
+              ))}
             </div>
             <CardDescription className="ml-2 mt-2 font-bold text-[10px]">
               {truncateDescription(product.description, 250)}

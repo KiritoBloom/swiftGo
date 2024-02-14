@@ -73,13 +73,16 @@ const ProductId = ({}) => {
           {product.images.slice(0, 1).map((image, index) => (
             <div className="flex ml-5 mt-5" key={index}>
               <div className="mr-5">
-                <Image
-                  src={image}
-                  width={800}
-                  height={600}
-                  alt={`Product Image ${index + 1} for ${product.title}`}
-                  className="ring-2 ring-offset-2 rounded-md"
-                />
+                {product.images.slice(2).map((imageUrl, index) => (
+                  <Image
+                    key={index}
+                    src={imageUrl.replace(/[\[\]"]+/g, "")} // Remove square brackets and quotes from the URL
+                    width={1000}
+                    height={800}
+                    alt={`Product Image for ${product.title}`}
+                    className="aspect-auto m-2 ring-2 ring-offset-2 rounded-md"
+                  />
+                ))}
               </div>
               <div className="flex flex-col justify-center">
                 <div className="bg-gray-200 border-4 rounded-sm mb-3 p-3">

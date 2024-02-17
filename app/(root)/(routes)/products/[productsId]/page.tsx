@@ -1,6 +1,7 @@
 "use client";
 
 // Import necessary modules and components
+// Import necessary modules and components
 import axios from "axios";
 import Image from "next/image";
 import { useEffect, useState } from "react";
@@ -23,11 +24,20 @@ interface Product {
   images: string[];
 }
 
+interface CartItem {
+  id: number;
+  title: string;
+  price: number;
+  description: string;
+}
+
 const ProductId = ({}) => {
   const [product, setProduct] = useState<Product | null>(null);
+  const [cartItems, setCartItems] = useState<CartItem[]>([]); // Assuming CartItem is the type for items in your cart
   const { toast } = useToast();
   const pathName = usePathname();
   const { userId } = useAuth();
+  const router = useRouter();
 
   // Extract the last part of the URL as the product ID
   const productId = pathName.split("/").pop();
@@ -58,21 +68,35 @@ const ProductId = ({}) => {
   const handleOnClick = async () => {
     if (product) {
       try {
-        await axios.post("/api/products", {
-          userId: userId,
-          id: product.id,
-          title: product.title,
-          price: product.price,
-          description: product.description,
-        });
-        toast({
-          description: "Item added to Cart   Successfully",
-          variant: "success",
-        });
+        // Check if the product is already in the cart based on its ID
+        const isProductInCart = cartItems.some(
+          (item) => String(item.id) === `${userId}-${product.id}`
+        );
+
+        if (isProductInCart) {
+          toast({
+            description: "Item Already in Cart",
+            variant: "destructive",
+          });
+        } else {
+          // Add the product to the cart with the combined userId and productId as id
+          await axios.post("/api/products", {
+            userId: userId,
+            id: `${userId}-${product.id}`,
+            title: product.title,
+            price: product.price,
+            description: product.description,
+          });
+
+          toast({
+            description: "Item added to Cart Successfully",
+            variant: "success",
+          });
+        }
       } catch (error) {
-        console.log("Error");
+        console.log("Error:", error);
         toast({
-          description: "Item Already in cart",
+          description: "Something went wrong",
           variant: "destructive",
         });
       }

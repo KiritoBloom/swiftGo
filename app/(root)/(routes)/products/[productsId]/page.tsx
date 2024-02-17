@@ -8,6 +8,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { ShoppingBag } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
+import { auth, useAuth } from "@clerk/nextjs";
 
 interface Product {
   id: number;
@@ -26,6 +27,7 @@ const ProductId = ({}) => {
   const [product, setProduct] = useState<Product | null>(null);
   const { toast } = useToast();
   const pathName = usePathname();
+  const { userId } = useAuth();
 
   // Extract the last part of the URL as the product ID
   const productId = pathName.split("/").pop();
@@ -57,6 +59,7 @@ const ProductId = ({}) => {
     if (product) {
       try {
         await axios.post("/api/products", {
+          userId: userId,
           id: product.id,
           title: product.title,
           price: product.price,

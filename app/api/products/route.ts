@@ -36,3 +36,20 @@ export async function GET(req: Request, res: Response) {
     return new NextResponse("Internal Error GET", { status: 500 });
   }
 }
+
+export async function DELETE(req: Request, res: Response) {
+  const { id: productId } = await req.json()
+
+  try{
+    await prismadb.productId.delete({
+      where: {
+        id: productId
+      }
+  })
+  return new NextResponse("Sucess", {status: 200})
+  }
+  catch(error){
+    console.log(`Internal Error ${productId}`)
+    return new NextResponse("Internal Error DELETE", {status: 500})
+  }
+}

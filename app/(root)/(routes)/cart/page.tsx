@@ -4,6 +4,15 @@ import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import axios from "axios";
+import {
+  Card,
+  CardDescription,
+  CardFooter,
+  CardTitle,
+} from "@/components/ui/card";
+import { X } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { useToast } from "@/components/ui/use-toast";
 
 // Define a type for your product
 interface Product {
@@ -16,6 +25,7 @@ interface Product {
 
 export default function Page() {
   const [cartItems, setCartItems] = useState<Product[]>([]);
+  const router = useRouter();
 
   useEffect(() => {
     const fetchCartItems = async () => {
@@ -37,34 +47,69 @@ export default function Page() {
       : description;
   };
 
+  // Calculate the total price
+  const total = cartItems.reduce(
+    (acc, item) => acc + parseFloat(item.Price),
+    0
+  );
+
+  const handleOnClick = async (productId: string) => {
+    console.log(`Removing product with ID: ${productId}`);
+    // Add your logic for removing the product from the cartItems if needed
+    if (productId) {
+      try {
+        await axios.delete(`/api/products`, {
+          data: { id: productId },
+        });
+
+        // Update state or handle success as needed
+      } catch (error) {
+        console.error("Error deleting product:", error);
+        // Handle error as needed
+      }
+    }
+  };
+
   return (
-    <div className="mr-10 mt-10 flex justify-center overflow-y-auto">
-      <div className="bg-primary/5 w-[500px] h-full rounded-md">
-        <h1 className="text-xl ml-5 mt-10">Cart Summary</h1>
-        <div className="flex justify-center items-center mt-10 ">
-          <Separator className=" w-[90%] bg-black" />
+    <div className="bg-primary/10 w-full h-full overflow-y-auto">
+      <div>
+        <h1 className="font-bold ml-5 mt-5 text-[30px] flex justify-center items-center">
+          Cart:
+        </h1>
+        <div className="flex justify-center items-center mt-2">
+          <Separator className="bg-black w-[90%]" />
         </div>
-        <div className="ml-5 mt-10">
-          <h2 className="mt-0">Order Total:</h2>
-          <div className="mt-5">
-            {/* Map through cartItems and display each product */}
-            {cartItems.map((item) => (
-              <div key={item.id} className="mb-8">
-                <p>Product Id: {item.id}</p>
-                <p>Product Name: {item.title}</p>
-                <p>Product Price: ${item.Price}</p>
-                <p>{truncateDescription(item.description, 100)}</p>
-                <Separator />
-              </div>
-            ))}
-            <h2 className="mt-10 text-xl font-bold flex justify-end">
-              Total: Mock Price
-            </h2>
-          </div>
+        <div className="mt-5 flex justify-center flex-wrap ">
+          {cartItems.map((item) => (
+            <Card className="mt-5 w-[90%] h-full mb-10">
+              <CardTitle className="mt-5 ml-5 flex-wrap flex">
+                {item.title}
+                {item.id}
+                <div
+                  className="justify-end items-end bg-primary/20 rounded-xl flex flex-wrap p-1 cursor-pointer"
+                  onClick={() => handleOnClick(item.id)}
+                  key={item.id}
+                >
+                  <X />
+                  <h1>Remove Product</h1>
+                </div>
+              </CardTitle>
+              <Separator className="w-[90%] m-auto mt-2" />
+              <CardDescription className="ml-5 mt-2">
+                {item.description}
+              </CardDescription>
+              <Separator className="w-[90%] m-auto mt-5" />
+              <CardFooter className="mt-5 font-bold text-[20px]">
+                Price: ${item.Price}
+              </CardFooter>
+            </Card>
+          ))}
         </div>
-        <div className="flex justify-center">
-          <Button className="mb-10 mt-5 w-[90%]">CheckOut</Button>
-        </div>
+      </div>
+      <div className="w-[15%] bg-primary/5 rounded-md mb-10 m-auto p-5">
+        <h2 className="text-xl font-bold">
+          Total Cost: ${total.toFixed(2)} {/* Display the total price */}
+        </h2>
       </div>
     </div>
   );

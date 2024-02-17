@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import axios from "axios";
 import {
@@ -25,7 +24,7 @@ interface Product {
 
 export default function Page() {
   const [cartItems, setCartItems] = useState<Product[]>([]);
-  const router = useRouter();
+  const { toast } = useToast();
 
   useEffect(() => {
     const fetchCartItems = async () => {
@@ -55,17 +54,28 @@ export default function Page() {
 
   const handleOnClick = async (productId: string) => {
     console.log(`Removing product with ID: ${productId}`);
-    // Add your logic for removing the product from the cartItems if needed
     if (productId) {
       try {
         await axios.delete(`/api/products`, {
           data: { id: productId },
         });
 
-        // Update state or handle success as needed
+        // Remove the deleted item from the cartItems state
+        setCartItems((prevCartItems) =>
+          prevCartItems.filter((item) => item.id !== productId)
+        );
+
+        toast({
+          description: "Item removed from Cart",
+          variant: "success",
+        });
       } catch (error) {
         console.error("Error deleting product:", error);
-        // Handle error as needed
+
+        toast({
+          description: "Something went Wrong!",
+          variant: "destructive",
+        });
       }
     }
   };
@@ -81,7 +91,7 @@ export default function Page() {
         </div>
         <div className="mt-5 flex justify-center flex-wrap ">
           {cartItems.map((item) => (
-            <Card className="mt-5 w-[90%] h-full mb-10">
+            <Card className="mt-5 w-[90%] h-full mb-10 transition-all">
               <CardTitle className="mt-5 ml-5 flex-wrap flex">
                 {item.title}
                 {item.id}

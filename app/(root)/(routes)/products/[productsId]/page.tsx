@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { ShoppingBag } from "lucide-react";
+import { useToast } from "@/components/ui/use-toast";
 
 interface Product {
   id: number;
@@ -23,7 +24,7 @@ interface Product {
 
 const ProductId = ({}) => {
   const [product, setProduct] = useState<Product | null>(null);
-  const router = useRouter();
+  const { toast } = useToast();
   const pathName = usePathname();
 
   // Extract the last part of the URL as the product ID
@@ -54,12 +55,24 @@ const ProductId = ({}) => {
 
   const handleOnClick = async () => {
     if (product) {
-      await axios.post("/api/products", {
-        id: product.id,
-        title: product.title,
-        price: product.price,
-        description: product.description,
-      });
+      try {
+        await axios.post("/api/products", {
+          id: product.id,
+          title: product.title,
+          price: product.price,
+          description: product.description,
+        });
+        toast({
+          description: "Item added to Cart   Successfully",
+          variant: "success",
+        });
+      } catch (error) {
+        console.log("Error");
+        toast({
+          description: "Item Already in cart",
+          variant: "destructive",
+        });
+      }
     }
   };
 

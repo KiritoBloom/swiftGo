@@ -24,8 +24,8 @@ export default function RootLayout({
         <body className={cn("bg-secondary", inter.className)}>
           <ThemeProvider attribute="class" defaultTheme="system">
             {children}
+            <Toaster />
           </ThemeProvider>
-          <Toaster />
         </body>
       </html>
     </ClerkProvider>

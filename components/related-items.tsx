@@ -94,7 +94,8 @@ const RelatedItems = () => {
     <div>
       <div className="flex justify-center flex-wrap mt-5 gap-x-[20px]">
         {products?.map((product) =>
-          categoryId === product.category.id ? (
+          categoryId === product.category.id &&
+          product.id.toString() !== productId ? (
             <Card
               key={product.id}
               className="w-[20vw] mt-5 hover:scale-105 transition-all duration-400 cursor-pointer"

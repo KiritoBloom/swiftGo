@@ -148,7 +148,7 @@ const ProductId = ({}) => {
           <div className="ml-5 mt-10">
             <h1 className="font-bold text-xl">Related Items</h1>
           </div>
-          <div className="overflow-y-auto overflow-hidden">
+          <div className="mb-5">
             <RelatedItems />
           </div>
         </>

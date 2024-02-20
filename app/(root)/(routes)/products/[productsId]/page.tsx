@@ -37,7 +37,6 @@ const ProductId = ({}) => {
   const { toast } = useToast();
   const pathName = usePathname();
   const { userId } = useAuth();
-  const router = useRouter();
 
   // Extract the last part of the URL as the product ID
   const productId = pathName.split("/").pop();
@@ -104,52 +103,59 @@ const ProductId = ({}) => {
   };
 
   return (
-    <div>
+    <div className="overflow-y-auto">
       {product ? (
         <>
-          <div className="flex justify-start mt-5 ml-5">
-            <h2 className="text-[40px] font-bold">{product.title}</h2>
-          </div>
-          {product.images.slice(0, 1).map((index) => (
-            <div className="flex ml-5 mt-5" key={index}>
-              <div className="mr-5">
-                {product.images.slice(2).map((imageUrl, index) => (
-                  <Image
-                    key={index}
-                    src={imageUrl.replace(/[\[\]"]+/g, "")} // Remove square brackets and quotes from the URL
-                    width={1000}
-                    height={800}
-                    alt={`Product Image for ${product.title}`}
-                    className="aspect-auto m-2 ring-2 ring-offset-2 rounded-md"
-                  />
-                ))}
-              </div>
-              <div className="flex flex-col justify-center">
-                <div className="bg-gray-200 border-4 rounded-sm mb-3 p-3">
-                  <p className="text-md">{product.description}</p>
-                </div>
-                <div className="bg-primary/10 rounded-md max-w-max">
-                  <p className="text-[35px] font-bold w-full p-3">
-                    Price: ${product.price}
-                  </p>
-                </div>
-                <div className="w-[16%]">
-                  <Button
-                    className="w-full mt-10 rounded-xl"
-                    onClick={() => handleOnClick()}
-                  >
-                    Add To Cart
-                    <ShoppingBasket className="ml-5 w-full h-full" size={20} />
-                  </Button>
-                </div>
-              </div>
+          <div className="overflow-y-auto p-5">
+            <div className="flex justify-start">
+              <h2 className="text-[40px] font-bold">{product.title}</h2>
             </div>
-          ))}
-          <div className="ml-5 mt-10">
-            <h1 className="font-bold text-xl">Related Items</h1>
-          </div>
-          <div className="mb-5">
-            <RelatedItems />
+            {product.images.slice(0, 1).map((index) => (
+              <div className="flex ml-5 mt-5" key={index}>
+                <div className="mr-5">
+                  {product.images.slice(2).map((imageUrl, index) => (
+                    <Image
+                      key={index}
+                      src={imageUrl.replace(/[\[\]"]+/g, "")} // Remove square brackets and quotes from the URL
+                      width={1000}
+                      height={800}
+                      alt={`Product Image for ${product.title}`}
+                      className="aspect-auto m-2 ring-2 ring-offset-2 rounded-md"
+                    />
+                  ))}
+                </div>
+                <div className="flex flex-col justify-center">
+                  <div className="bg-gray-200 border-4 rounded-sm mb-3 p-3">
+                    <p className="text-md">{product.description}</p>
+                  </div>
+                  <div className="bg-primary/10 rounded-md max-w-max">
+                    <p className="text-[35px] font-bold w-full p-3">
+                      Price: ${product.price}
+                    </p>
+                  </div>
+                  <div className="w-[16%]">
+                    <Button
+                      className="w-full mt-10 rounded-xl"
+                      onClick={() => handleOnClick()}
+                    >
+                      Add To Cart
+                      <div className="w-5">
+                        <ShoppingBasket
+                          className="ml-3 w-full h-full"
+                          size={20}
+                        />
+                      </div>
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            ))}
+            <div className="ml-5 mt-10">
+              <h1 className="font-bold text-xl">Related Items</h1>
+            </div>
+            <div className="mb-5 border">
+              <RelatedItems />
+            </div>
           </div>
         </>
       ) : (

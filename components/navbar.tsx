@@ -13,7 +13,7 @@ const Navbar = () => {
   };
 
   return (
-    <div className="bg-gray-200 w-full h-[50px] flex items-center border-b">
+    <div className="bg-gray-200 w-full h-[50px] max-h-[50px] flex items-center border-b pb-2 pt-2">
       <ShoppingCart className="ml-5 mr-2 w-5 h-5" />
       <h1 className="font-bold">
         Swift<span className="text-red-700">G</span>

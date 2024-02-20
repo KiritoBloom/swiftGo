@@ -1,15 +1,15 @@
 "use client";
 
 // Import necessary modules and components
-// Import necessary modules and components
 import axios from "axios";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
-import { ShoppingBag } from "lucide-react";
+import { ShoppingBasket } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
-import { auth, useAuth } from "@clerk/nextjs";
+import { useAuth } from "@clerk/nextjs";
+import RelatedItems from "@/components/related-items";
 
 interface Product {
   id: number;
@@ -110,7 +110,7 @@ const ProductId = ({}) => {
           <div className="flex justify-start mt-5 ml-5">
             <h2 className="text-[40px] font-bold">{product.title}</h2>
           </div>
-          {product.images.slice(0, 1).map((image, index) => (
+          {product.images.slice(0, 1).map((index) => (
             <div className="flex ml-5 mt-5" key={index}>
               <div className="mr-5">
                 {product.images.slice(2).map((imageUrl, index) => (
@@ -133,17 +133,23 @@ const ProductId = ({}) => {
                     Price: ${product.price}
                   </p>
                 </div>
-                <Button
-                  className="w-[15%] mt-10 rounded-xl"
-                  onClick={() => handleOnClick()}
-                >
-                  Add To Cart <ShoppingBag className="ml-5" />
-                </Button>
+                <div className="w-[16%]">
+                  <Button
+                    className="w-full mt-10 rounded-xl"
+                    onClick={() => handleOnClick()}
+                  >
+                    Add To Cart
+                    <ShoppingBasket className="ml-5 w-full h-full" size={20} />
+                  </Button>
+                </div>
               </div>
             </div>
           ))}
           <div className="ml-5 mt-10">
             <h1 className="font-bold text-xl">Related Items</h1>
+          </div>
+          <div className="overflow-y-auto overflow-hidden">
+            <RelatedItems />
           </div>
         </>
       ) : (

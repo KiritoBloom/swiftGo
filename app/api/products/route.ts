@@ -4,7 +4,7 @@ import { NextResponse } from "next/server";
 
 export async function POST(req: Request, res: Response) {
   try {
-    const { userId } = auth(); // Destructure and provide a default value
+    const { userId } = await auth(); // Destructure and provide a default value
     if (!userId) {
       // Handle the case where userId is not available
       return new NextResponse("Unauthorized", { status: 401 });
@@ -12,7 +12,7 @@ export async function POST(req: Request, res: Response) {
     const product = await req.json();
     await prismadb.productId.create({
       data: {
-        userId: userId,
+        userId,
         id: product.id.toString(),
         title: product.title,
         Price: product.price.toString(),

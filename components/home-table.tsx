@@ -59,10 +59,10 @@ export const HomeTable = () => {
     <>
       <div className="items-center justify-center flex mt-5">
         <Card className="w-[90vw] h-[350px] bg-cyan-500">
-          <CardTitle className="flex justify-center mt-10 text-[70px] text-white">
+          <CardTitle className="flex justify-center text-center mt-10 text-[35px] text-white md:text-[48px]">
             Your go-to to the best products
           </CardTitle>
-          <CardContent className="flex justify-center mt-10 text-[50px] font-bold">
+          <CardContent className="flex justify-center mt-5 text-[38px] font-bold md:text-[70px] text-center">
             Check out our new hit Products!
           </CardContent>
         </Card>
@@ -70,14 +70,14 @@ export const HomeTable = () => {
       <div className="flex justify-center mt-5">
         <h1 className="font-bold underline text-[30px]">Hit Products!</h1>
       </div>
-      <div className="flex justify-center flex-wrap mt-5 gap-x-[20px] ">
+      <div className="grid grid-flow-col grid-rows-9 justify-center gap-x-2 items-center md:grid-rows-2 gap-y-5 mt-10">
         {products.slice(1, 6).map((product) => (
           <Card
             onClick={() => handleOnClick(product.id)}
             key={product.id}
-            className="w-[20vw] h-[60vh] mt-5 hover:scale-105 transition-all duration-400 cursor-pointer"
+            className="w-[95%] h-full md:w-[20vw] md:h-[60vh] m-auto mt-10 hover:scale-105 transition-all duration-400 cursor-pointer"
           >
-            <CardTitle className="mt-5 flex justify-center text-lg">
+            <CardTitle className="mt-5 flex justify-center text-lg text-center">
               {product.title}
             </CardTitle>
             <Separator className="mt-2" />
@@ -89,7 +89,7 @@ export const HomeTable = () => {
                   width={200}
                   height={200}
                   alt={`Product Image for ${product.title}`}
-                  className="w-[10vw] aspect-auto m-2 ring-2 ring-offset-2 rounded-md"
+                  className="w-[30vw] md:w-[10vw] aspect-auto m-2 ring-2 ring-offset-2 rounded-md"
                 />
               ))}
             </div>

@@ -48,7 +48,7 @@ const SearchInput = () => {
   };
 
   return (
-    <div className="flex justify-center flex-wrap">
+    <div className="justify-center flex-wrap hidden md:flex">
       <div className="absolute flex justify-center items-center top-1">
         <Search className="absolute h-4 w-4 top-3 left-4 text-muted-foreground" />
         <Input

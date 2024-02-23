@@ -54,13 +54,13 @@ export default function Page() {
     <div className="flex flex-col items-center overflow-y-auto">
       <h1 className="text-[50px] font-bold mt-5">Products</h1>
       <div className="flex justify-center flex-wrap mt-5 gap-x-[20px]">
-        {products.slice(1, 31).map((product) => (
+        {products.map((product) => (
           <Card
             key={product.id}
-            className="w-[20vw] mt-5 hover:scale-105 transition-all duration-400 cursor-pointer"
+            className="w-[95%] md:w-[20vw] mt-5 hover:scale-105 transition-all duration-400 cursor-pointer mx-auto"
             onClick={() => handleOnClick(product.id)}
           >
-            <CardTitle className="mt-5 flex justify-center text-md">
+            <CardTitle className="mt-5 flex justify-center text-md text-center">
               {product.title}
             </CardTitle>
             <Separator className="mt-2" />
@@ -72,7 +72,7 @@ export default function Page() {
                   width={200}
                   height={200}
                   alt={`Product Image for ${product.title}`}
-                  className="w-[10vw] aspect-auto m-2 ring-2 ring-offset-2 rounded-md"
+                  className="md:w-[10vw] aspect-auto m-2 ring-2 ring-offset-2 rounded-md w-[30%]"
                 />
               ))}
             </div>

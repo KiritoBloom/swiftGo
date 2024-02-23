@@ -98,7 +98,7 @@ const RelatedItems = () => {
           product.id.toString() !== productId ? (
             <Card
               key={product.id}
-              className="w-[20vw] mt-5 hover:scale-105 transition-all duration-400 cursor-pointer"
+              className="md:w-[20vw] w-[95%] mt-5 hover:scale-105 transition-all duration-400 cursor-pointer"
               onClick={() => handleOnClick(product.id)}
             >
               <CardTitle className="mt-5 flex justify-center text-md">
@@ -113,7 +113,7 @@ const RelatedItems = () => {
                     width={200}
                     height={200}
                     alt={`Product Image for ${product.title}`}
-                    className="w-[10vw] aspect-auto m-2 ring-2 ring-offset-2 rounded-md"
+                    className="w-[50%] aspect-auto m-2 ring-2 ring-offset-2 rounded-md"
                   />
                 ))}
               </div>

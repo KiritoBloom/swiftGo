@@ -33,7 +33,7 @@ export const Sidebar = () => {
   };
 
   return (
-    <div className="bg-gray-200 h-full w-[100px] border-t">
+    <div className="bg-gray-200 h-full w-[100px] border-t hidden md:block">
       {routes.map((route) => (
         <div
           onClick={() => onNavigate(route.href, route.pro)}

@@ -89,23 +89,24 @@ export default function Page() {
         <div className="flex justify-center items-center mt-2">
           <Separator className="bg-black w-[90%]" />
         </div>
-        <div className="mt-5 flex justify-center flex-wrap ">
+        <div className="mt-5 flex justify-center flex-wrap">
           {cartItems.map((item) => (
-            <Card className="mt-5 w-[90%] h-full mb-10 transition-all">
-              <CardTitle className="mt-5 ml-5 flex-wrap flex">
-                {item.title}
-                {item.id}
+            <Card
+              className="mt-5 w-[90%] h-full mb-10 transition-all"
+              key={item.id}
+            >
+              <CardTitle className="mt-5 ml-5 flex-wrap flex text-center items-center justify-between">
+                <div>{item.title}</div>
                 <div
-                  className="justify-end items-end bg-primary/20 rounded-xl flex flex-wrap p-1 cursor-pointer"
+                  className="bg-primary/20 rounded-xl flex flex-wrap p-1 cursor-pointer md:mr-5 md:mt-0 md:mb-0 mx-auto mt-5 mb-2"
                   onClick={() => handleOnClick(item.id)}
-                  key={item.id}
                 >
                   <X />
-                  <h1>Remove Product</h1>
+                  <h1 className="ml-2">Remove Product</h1>
                 </div>
               </CardTitle>
               <Separator className="w-[90%] m-auto mt-2" />
-              <CardDescription className="ml-5 mt-2">
+              <CardDescription className="ml-5 mt-2 mr-2">
                 {item.description}
               </CardDescription>
               <Separator className="w-[90%] m-auto mt-5" />
@@ -116,7 +117,7 @@ export default function Page() {
           ))}
         </div>
       </div>
-      <div className="w-[15%] bg-primary/5 rounded-md mb-10 m-auto p-5">
+      <div className="md:w-[15%] w-[95%] bg-primary/20 rounded-md mb-10 m-auto p-5">
         <h2 className="text-xl font-bold">
           Total Cost: ${total.toFixed(2)} {/* Display the total price */}
         </h2>

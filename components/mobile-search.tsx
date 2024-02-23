@@ -99,7 +99,7 @@ const MobileSearch = () => {
                         </div>
                       ) : (
                         <div className="text-center text-gray-500  bg-white border rounded-md">
-                          No results found for "{searchTerm}".
+                          No results found for &quot;{searchTerm}&quot;.
                         </div>
                       )}
                     </>

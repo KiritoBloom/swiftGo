@@ -4,7 +4,8 @@ import { NextResponse } from "next/server";
 
 export async function POST(req: Request, res: Response) {
   try {
-    const { userId } = auth(); // Destructure and provide a default value
+    const { userId } = await req.json();
+
     if (!userId) {
       // Handle the case where userId is not available
       return new NextResponse("Unauthorized", { status: 401 });
@@ -28,9 +29,10 @@ export async function POST(req: Request, res: Response) {
 }
 
 
+
 export async function GET(req: Request, res: Response) {
   try {
-    const { userId } = auth();
+    const { userId } = await req.json();
     const products = await prismadb.productId.findMany({
       where: {
         userId: userId?.toString()
@@ -54,7 +56,7 @@ export async function DELETE(req: Request, res: Response) {
   const { id: productId } = await req.json()
 
   try{
-    const { userId } = auth();
+    const { userId } = await req.json();
     await prismadb.productId.delete({
       where: {
         id: productId,

@@ -1,5 +1,5 @@
 import prismadb from "@/lib/prismadb";
-import { auth, useAuth } from "@clerk/nextjs";
+import { auth} from "@clerk/nextjs";
 import { NextResponse } from "next/server";
 
 export async function POST(req: Request, res: Response) {
@@ -9,6 +9,7 @@ export async function POST(req: Request, res: Response) {
       // Handle the case where userId is not available
       return new NextResponse("Unauthorized", { status: 401 });
     }
+
     const product = await req.json();
     await prismadb.productId.create({
       data: {
@@ -25,6 +26,7 @@ export async function POST(req: Request, res: Response) {
     return new NextResponse("Internal Error", { status: 500 });
   }
 }
+
 
 export async function GET(req: Request, res: Response) {
   try {

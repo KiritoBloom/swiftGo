@@ -58,11 +58,11 @@ export const HomeTable = () => {
   return (
     <>
       <div className="items-center justify-center flex mt-5">
-        <Card className="w-[90vw] h-[350px] bg-cyan-500">
+        <Card className="w-[90%] h-[350px] bg-cyan-500">
           <CardTitle className="flex justify-center text-center mt-10 text-[35px] text-white md:text-[48px]">
             Your go-to to the best products
           </CardTitle>
-          <CardContent className="flex justify-center mt-5 text-[38px] font-bold md:text-[70px] text-center">
+          <CardContent className="flex justify-center mt-5 text-[38px] font-bold md:text-[40px] lg:text-[70px] text-center">
             Check out our new hit Products!
           </CardContent>
         </Card>
@@ -75,7 +75,7 @@ export const HomeTable = () => {
           <Card
             onClick={() => handleOnClick(product.id)}
             key={product.id}
-            className="w-[95%] h-full md:w-[20vw] md:h-[60vh] m-auto mt-10 hover:scale-105 transition-all duration-400 cursor-pointer"
+            className="w-[95%] h-full md:w-[20vw] md:h-[30vh] lg:h-[60vh] m-auto mt-10 hover:scale-105 transition-all duration-400 cursor-pointer"
           >
             <CardTitle className="mt-5 flex justify-center text-lg text-center">
               {product.title}

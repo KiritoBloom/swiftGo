@@ -53,7 +53,7 @@ const SearchInput = () => {
         <Search className="absolute h-4 w-4 top-3 left-4 text-muted-foreground" />
         <Input
           placeholder="Search..."
-          className="pl-10 bg-primary/10 flex justify-center items-center"
+          className="pl-10 bg-primary/10 flex justify-center items-center md:w-[500px] lg:w-[50vw]"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
         />

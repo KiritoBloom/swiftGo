@@ -22,10 +22,8 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang="en">
         <body className={cn("bg-secondary", inter.className)}>
-          <ThemeProvider attribute="class" defaultTheme="system">
-            {children}
-            <Toaster />
-          </ThemeProvider>
+          {children}
+          <Toaster />
         </body>
       </html>
     </ClerkProvider>

@@ -14,9 +14,9 @@ export async function POST(req: Request, res: Response) {
       data: {
         userId: userId.toString(),
         id: product.id.toString(),
-        title: product.title,
+        title: product.title.toString(),
         Price: product.price.toString(),
-        description: product.description,
+        description: product.description.toString(),
       },
     });
     return new NextResponse("Success", { status: 200 });

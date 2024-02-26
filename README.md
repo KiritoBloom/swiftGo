@@ -16,7 +16,7 @@ To set up and run the Swift Go project locally, follow these steps:
 
 1. **Clone the Repository:**
    ```bash
-   git clone https://github.com/your-username/swift-go.git
+   git clone https://github.com/KiritoBloom/swiftGo.git
    ```
 
 2. **Install Dependencies:**
